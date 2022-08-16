@@ -15,22 +15,22 @@ Ly = 10
 dx = 0.01
 
 u0 = 0.3
-r0 = 0.6
+r0 = 0.5
 
 a = 1.3
-b = 5
+b = 2
 c = 1
 
 if b > 1:
     a = a*b
-    r0 = 1.2*r0
+    # r0 = 1.2*r0
 
 X0 = 5
 Y0 = 1
 R = 4
 spread = 1
 
-T = 1
+T = 3
 
 event = slfv.events.OneTailRadii(u0, r0, c, b, a, 2)
 
@@ -48,4 +48,4 @@ def freq_func(X, Y, X0, Y0, R, spread):
 slfv.set_freq(freq_func, X0 = X0, Y0 = Y0, R = R, spread = spread)
 slfv.run(T)
 slfv.plot()
-# slfv.frequency.save("/home/raphael/Recherche/SLFV_two_radii/slfv_onetail_b_5")
+# slfv.frequency.save("/home/raphael/Recherche/SLFV_two_radii/slfv_onetail_b_2")

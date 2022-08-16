@@ -11,9 +11,9 @@ import matplotlib.pyplot as plt
 import palettable.colorbrewer.diverging as palet
 import SLFV as slfv
 
-files = ["/home/raphael/Recherche/SLFV_two_radii/slfv_onetail_b_02", "/home/raphael/Recherche/SLFV_two_radii/slfv_onetail_b_5"]
+files = ["/home/raphael/Recherche/SLFV_two_radii/slfv_onetail_b_2", "/home/raphael/Recherche/SLFV_two_radii/slfv_onetail_b_0p5"]
 
-b_values = [0.2, 5]
+b_values = [2, 0.5]
 
 figsize = (11, 5)
 cmap = palet.RdBu_11.mpl_colormap
@@ -29,7 +29,7 @@ freqs = []
 for file in files:
     try:
         freqs.append(slfv.load_freq_from_file(file + '.json', file + '.npy', d = 2))
-    except e:
+    except Exception as e:
         print("Error while loading frequency: ", e)
     
     

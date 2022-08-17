@@ -11,11 +11,11 @@
 
 ml python/3.9
 
-d = (2 2 2 3 3 3 3)
-alpha = (1.5 1.5 2 1.5 1.5 2 2)
-beta = (1.5 2.5 2.5 2.5 3.5 2.5 3.5)
+d=(2 2 2 3 3 3 3)
+alpha=(1.5 1.5 2 1.5 1.5 2 2)
+beta=(1.5 2.5 2.5 2.5 3.5 2.5 3.5)
 
-out_dir = "~/WrightMalecot/out"
+out_dir="~/WrightMalecot/out"
 
 for i in ${!d[@]};
 do

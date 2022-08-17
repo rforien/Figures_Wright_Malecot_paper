@@ -44,7 +44,13 @@ try:
     filename
 except:
     filename = 'test'
+    
+params = pd.Series(index = ["d", "alpha", "beta"])
+params['d'] = d
+params['alpha'] = alpha
+params['beta'] = beta
 
+verbose = False
 
 zeta = 1
 gamma = 1
@@ -151,7 +157,8 @@ F_values = pd.Series(index = x_values, dtype = np.float64)
 
 for (i,x) in enumerate(x_values):
     F_values[x] = compute_F(x, max_error)
-    print("Computed %d of %d entries" % (i+1, nx))
+    if verbose:
+        print("Computed %d of %d entries" % (i+1, nx))
 
-F_values.to_csv(filename, sep = ',')
-
+F_values.to_csv(filename + ".csv", sep = ',')
+params.to_csv(filename + "params.csv", sep = ',')

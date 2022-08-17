@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J computation Wright Malecot
+#SBATCH -J computationWrightMalecot
 #SBATCH -o sorties_WM.out
 #SBATCH -e error_WM.out
 #SBATCH --ntasks=7

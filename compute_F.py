@@ -12,6 +12,7 @@ import scipy.special as special
 import pandas as pd
 import sys, getopt
 
+
 try:
     opts, args = getopt.getopt(sys.argv[1:], "d:a:b:o:", ["dimension=", "alpha=", "beta=", "output="])
 except getopt.GetoptError:
@@ -28,22 +29,23 @@ for opt, arg in opts:
     elif opt in ('-o', '--output'):
         filename = str(arg)
 
-try:
-    d
-except:
-    d = 2
-try:
-    alpha
-except:
-    alpha = 2
-try:
-    beta
-except:
-    beta = 2
-try:
-    filename
-except:
-    filename = 'test'
+#try:
+#    d
+#except:
+#    d = 2
+#try:
+#    alpha
+#except:
+#    alpha = 2
+#try:
+#    beta
+#except:
+#    beta = 2
+#try:
+#    filename
+#except:
+#    filename = 'test'
+
     
 params = pd.Series(index = ["d", "alpha", "beta"], dtype=np.float64)
 params['d'] = d
@@ -55,7 +57,7 @@ verbose = True
 if verbose:
     print(params)
     print(filename)
-    
+
 
 zeta = 1
 gamma = 1
@@ -150,11 +152,6 @@ def compute_a(i, x):
 
 # compute the value of F at one point
 def compute_F(x, max_rel_error = 1e-2):
-    # a = [compute_a(0, x)]
-    # i = 0
-    # while np.abs(a[-1]/np.sum(a)) > max_error or np.mod(i,2) == 1:
-    #     i = i + 1
-    #     a.append(compute_a(i, x))
     return compute_alternate_sum(compute_a, max_rel_error, x = x)
 
 x_values = np.linspace(0, xmax, nx+1)[1:]
@@ -167,3 +164,5 @@ for (i,x) in enumerate(x_values):
 
 F_values.to_csv(filename + ".csv", sep = ',')
 params.to_csv(filename + "params.csv", sep = ',')
+
+

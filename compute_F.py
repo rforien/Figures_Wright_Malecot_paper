@@ -45,24 +45,29 @@ try:
 except:
     filename = 'test'
     
-params = pd.Series(index = ["d", "alpha", "beta"])
+params = pd.Series(index = ["d", "alpha", "beta"], dtype=np.float64)
 params['d'] = d
 params['alpha'] = alpha
 params['beta'] = beta
 
-verbose = False
+verbose = True
+
+if verbose:
+    print(params)
+    print(filename)
+    
 
 zeta = 1
 gamma = 1
 sigma2 = 1
 mu = 0.2
 
-xmax = 10
-nx = 4
+xmax = 15
+nx = 30
 
-max_error = 1e-1
+max_error = 5e-2
 
-assert (beta >= d and alpha > d-1) or (beta < d and d - beta + alpha > d-1), 'Integrals will diverge'
+assert (alpha > np.minimum(d, beta) - 1), 'Integrals will diverge'
 
 if alpha > 2:
     print("Warning, alpha cannot be larger than 2. Setting alpha = 2.")
@@ -158,7 +163,7 @@ F_values = pd.Series(index = x_values, dtype = np.float64)
 for (i,x) in enumerate(x_values):
     F_values[x] = compute_F(x, max_error)
     if verbose:
-        print("Computed %d of %d entries" % (i+1, nx))
+        print("Computed %d of %d entries, x=%f" % (i+1, nx, x))
 
 F_values.to_csv(filename + ".csv", sep = ',')
 params.to_csv(filename + "params.csv", sep = ',')

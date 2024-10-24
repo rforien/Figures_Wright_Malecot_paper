@@ -10,10 +10,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-directory = 'out/'
+directory = 'out2/'
 
-files = ['F_values_run_' + str(i) for i in range(5)]
 plot_dimensions = [2, 3]
+
+files = []
+for d in plot_dimensions:
+    files = files + ['F_values_d-' + str(d) + '_run-' + str(i) for i in range(4)]
+
+colour_id = np.tile(np.arange(4), len(plot_dimensions))
 
 figsize = (9,4)
 xlim_left = -0.5
@@ -24,18 +29,20 @@ xlabel = "distance between sampled individuals"
 ylabel = 'Probability of identity'
 
 plt.style.use('ggplot')
+colours = plt.rcParams['axes.prop_cycle'].by_key()['color']
 
 fig, ax = plt.subplots(1, len(plot_dimensions), figsize = figsize, sharey = True)
 
-for file in files:
+for (j, file) in enumerate(files):
     params = pd.read_csv(directory + file + 'params.csv', sep=',', index_col = 0).squeeze("columns")
     F_values = pd.read_csv(directory + file + '.csv', sep = ',', index_col = 0).squeeze("columns")
     
-    F_values = first_value * F_values / F_values.values[2]
+    F_values = first_value * F_values / F_values.values[9]
     
     i = np.where(plot_dimensions == params["d"])[0][0]
+    color = colours[colour_id[j]]
     
-    ax[i].plot(F_values, label = r"$\alpha$=%.1f, $\beta$=%.1f" % (params["alpha"], params["beta"]))
+    ax[i].plot(F_values, label = r"$\alpha$=%.1f, $\beta$=%.1f" % (params["alpha"], params["beta"]), color = color)
     
 for i in range(len(plot_dimensions)):
     ax[i].set_title(r"$d$ = %d" % plot_dimensions[i])

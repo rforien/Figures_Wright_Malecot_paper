@@ -11,15 +11,18 @@
 
 # ml python/3.9
 
-d=(2 2 2 3 3)
-alpha=(1.5 1.5 2 1.5 2)
-beta=(1.5 2.5 2.5 2 2.5)
+d=(2 3)
+alpha=(1.5 1.5 2 2)
+beta=(1.5 2.2 2.2 3)
 
-out_dir="out"
+out_dir="out2"
 
 for i in ${!d[@]};
 do
-	./compute_F.py -d ${d[$i]} --alpha ${alpha[$i]} --beta ${beta[$i]} --output "${out_dir}/F_values_run_${i}"
+	for j in ${!alpha[@]};
+	do
+		./compute_F.py -d ${d[$i]} --alpha ${alpha[$j]} --beta ${beta[$j]} --output "${out_dir}/F_values_d-${d[$i]}_run-${j}"
+	done
 done
 
 

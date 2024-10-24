@@ -65,15 +65,21 @@ sigma2 = 1
 mu = 0.2
 
 xmax = 15
-nx = 30
+nx = 50
 
 max_error = 5e-2
 
-assert (alpha > np.minimum(d, beta) - 1), 'Integrals will diverge'
 
 if alpha > 2:
     print("Warning, alpha cannot be larger than 2. Setting alpha = 2.")
     alpha = 2
+
+if d == 3 and alpha == 2 and beta >= d:
+    bessel = True
+else:
+    bessel = False
+    assert (alpha > np.minimum(d, beta) - 1), 'Integrals will diverge'
+
 
 # function to compute sum of terms of alternating signs up to a given precisions
 def compute_alternate_sum(general_term, rel_error, *args, **kwargs):
@@ -152,7 +158,10 @@ def compute_a(i, x):
 
 # compute the value of F at one point
 def compute_F(x, max_rel_error = 1e-2):
-    return compute_alternate_sum(compute_a, max_rel_error, x = x)
+    if bessel:
+        return (x/np.sqrt(2*mu))**(1-d/2) * special.kn(1-d/2, np.sqrt(2*mu) * x)
+    else:
+        return compute_alternate_sum(compute_a, max_rel_error, x = x)
 
 x_values = np.linspace(0, xmax, nx+1)[1:]
 F_values = pd.Series(index = x_values, dtype = np.float64)

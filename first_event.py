@@ -9,7 +9,9 @@ Created on Tue Aug  9 15:37:22 2022
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
-import palettable.colorbrewer.diverging as palet
+# import palettable.colorbrewer.diverging as palet
+# import palettable.cartocolors.sequential as palet
+import palettable.cmocean.sequential as palet
 import SLFV as slfv
 
 Lx = 10
@@ -27,16 +29,18 @@ u = 0.4
 parent_draw_radius = 0.8
 parent_draw_angle = 2.5*np.pi/3
 
-linewidth = 1.3
-marker_size = 60
+linewidth = 1.5
+marker_size = 80
 parent_color = 'white'
 event_color = 'black'
 
 legend_background_color = "#D4D4D4"
 
-cmap = palet.RdBu_11.mpl_colormap
+# cmap = palet.RdBu_11.mpl_colormap
+# cmap = palet.DarkMint_7.mpl_colormap
+cmap = palet.Deep_20.mpl_colormap
 
-titles = [r'$r_1 > r_2$', r'$r_1 < r_2$']
+titles = [r'$r_1 \gg 1$', r'$r_2 \gg 1$']
 htitle_fontsize = 16
 
 htitles = ['Before the reproduction event', 'After the reproduction event']
@@ -46,9 +50,9 @@ cbar_width = 0.15
 cbar_padding = 0.025
 cbar_height = 0.8
 
-freq_init = slfv.Frequency2D((Lx, Ly), .01, 2)
-freq1 = slfv.Frequency2D((Lx, Ly), dx, 2)
-freq2 = slfv.Frequency2D((Lx, Ly), dx, 2)
+freq_init = slfv.frequency.Frequency2D((Lx, Ly), dx, 2)
+freq1 = slfv.frequency.Frequency2D((Lx, Ly), dx, 2)
+freq2 = slfv.frequency.Frequency2D((Lx, Ly), dx, 2)
 
 freq_array = [freq1, freq2]
 
